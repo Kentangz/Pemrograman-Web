@@ -1,0 +1,250 @@
+/* General Styles */
+body {
+  background-color: #03A9F4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  padding: 10px 20px;
+}
+
+.logo img {
+  width: 50px; /* Adjust the logo size as needed */
+}
+
+.nav-right {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-right li {
+  display: inline;
+  margin-left: 20px;
+}
+
+.nav-right a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Hero Section */
+.section-1 {
+  background: url('pxfuel.jpg') no-repeat center center/cover;
+  padding: 100px 20px; /* Meningkatkan padding untuk tampilan yang lebih baik */
+  text-align: center;
+  color: white; /* Mengubah warna teks agar kontras dengan latar belakang */
+  position: relative; /* Untuk memungkinkan penambahan overlay */
+}
+.btn-explore {
+  background-color: #ffcc00; /* Ganti dengan warna yang diinginkan */
+  color: white; /* Warna teks */
+  padding: 10px 20px; /* Ruang di dalam tombol */
+  border-radius: 5px; /* Sudut melengkung */
+  text-decoration: none; /* Menghapus garis bawah */
+  font-weight: bold; /* Membuat teks lebih tebal */
+  transition: background-color 0.3s ease; /* Efek transisi */
+}
+
+.btn-explore:hover {
+  background-color: #e0a800; /* Ganti warna saat hover */
+}
+
+/* Menambahkan Overlay untuk Meningkatkan Keterbacaan Teks */
+.section-1:before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay semi transparan */
+  z-index: 1
+}
+
+.section-1-text {
+  position: relative;
+  z-index: 2; /* Memastikan teks berada di atas overlay */
+}
+
+.featured-products {
+  background-color: #f0f8ff; /* Ganti dengan kode warna yang diinginkan */
+  padding: 20px; /* Tambahkan padding jika diperlukan */
+  border-radius: 5px; /* (Opsional) Menambahkan sudut melengkung */
+}
+.top-books {
+  background-color: #ffe4e1; /* Ganti dengan kode warna yang diinginkan */
+  padding: 20px; /* Tambahkan padding jika diperlukan */
+  border-radius: 5px; /* Menambahkan sudut melengkung */
+}
+
+/* Section 2: Featured Products and Top Books */
+.section-2 {
+  padding: 20px;
+}
+
+.featured-and-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Featured Products */
+.featured-products {
+  flex: 2; /* Flex grow to take more space */
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.image-holder {
+  flex: 1 1 calc(30% - 20px);
+  margin: 10px;
+}
+
+.image-holder img {
+  width: 80%; /* Make images smaller */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional: for rounded corners */
+  margin: 0 auto; /* Center images within the holder */
+}
+
+/* Top Books */
+.top-books {
+  flex:  0 1 200px; /* Flex grow to take less space */
+  margin-left: 20px; /* Space between sections */
+}
+
+.top-books-gallery {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-book {
+  margin-bottom: 10px; /* Space between top books */
+}
+
+.top-book img {
+  width: 100%; /* Full width of the column */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional: for rounded corners */
+}
+
+/* Featured Brands */
+.section-4 {
+  padding: 20px;
+}
+
+.brands-container {
+  display: flex; /* Mengatur kolom untuk brand dan sponsored */
+  justify-content: space-between; /* Memberikan ruang antara dua kolom */
+}
+
+.brands {
+  flex: 1; /* Kolom untuk brand mengambil ruang yang lebih besar */
+  display: flex;
+  flex-direction: column; /* Gambar brand ditampilkan dalam kolom */
+  gap: 10px; /* Jarak antara gambar brand */
+}
+
+.brand img {
+  width: 100px; /* Sesuaikan ukuran gambar brand */
+  height: auto; /* Mempertahankan rasio aspek */
+}
+
+.special-sponsored {
+  flex: 1; /* Kolom untuk sponsored mengambil ruang */
+  margin-left: 20px; /* Jarak antara brand dan sponsored */
+}
+
+.special-sponsored h3 {
+  margin-bottom: 10px; /* Jarak bawah judul */
+}
+
+.sponsored-images {
+  display: flex; /* Menampilkan gambar sponsored dalam baris */
+  gap: 10px; /* Jarak antara gambar */
+}
+
+.sponsored-item img {
+  width: 100px; /* Sesuaikan ukuran gambar sponsored */
+  height: auto; /* Mempertahankan rasio aspek */
+}
+
+
+/* Contact Us */
+.section-5 {
+  padding: 20px;
+  background-color: rgb(246, 255, 240);
+}
+
+.column {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 10px 0 5px;
+}
+
+input, select, textarea {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+  background: #333;
+  color: white;
+  padding: 20px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-section {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.footer-section h3 {
+  margin-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.section-1, .section-2, .section-4, .section-5 {
+  border: 4px solid #00000084; /* Ganti #ccc dengan warna yang diinginkan */
+  margin-bottom: 2px; /* Tambahkan jarak antara section */
+  padding: 5px; /* Tambahkan padding agar isi tidak menempel pada border */
+  border-radius: 5px; /* (Opsional) Menambahkan sudut melengkung pada border */
+}
