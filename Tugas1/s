@@ -1,0 +1,85 @@
+/*
+// Mendapatkan elemen input display
+let display = document.getElementById('display');
+
+// Fungsi untuk menghapus seluruh isi display dan mengatur nilai awal menjadi '0'
+function clearDisplay() {
+    display.value = '0';
+}
+
+// Fungsi untuk menambahkan angka ke dalam display
+function appendNumber(number) {
+    // Jika display menunjukkan 'Error', reset display ke angka yang dimasukkan
+    if (display.value === 'Error') {
+        display.value = number;
+    } else {
+        // Jika display saat ini adalah '0', ganti dengan angka yang diinput
+        if (display.value === '0') {
+            display.value = number;
+        } else {
+            display.value += number;
+        }
+    }
+}
+
+// Fungsi untuk menambahkan operator matematika atau titik ke dalam display
+function appendOperator(operator) {
+    let currentValue = display.value.trim();
+
+    // Cek jika karakter terakhir adalah operator
+    if (['+', '-', '*', '/', '%', '^'].includes(currentValue.slice(-1))) {
+        display.value = currentValue.slice(0, -1) + operator + ' ';
+    } else if (operator === '.') {
+        let parts = currentValue.split(/[\+\-\*\/\%\^ ]+/);
+        let lastPart = parts[parts.length - 1];
+
+        if (!lastPart.includes('.')) {
+            display.value += '.';
+        }
+    } else {
+        display.value += ' ' + operator + ' ';
+    }
+}
+
+// Fungsi untuk menghitung hasil dari ekspresi matematika di display
+function calculate() {
+    try {
+        let expression = display.value.replace(/x/g, '*').replace(/\^/g, '**');
+
+        if (['+', '-', '*', '/', '%', '^'].includes(expression.trim().slice(-1))) {
+            return;
+        }
+
+        let result = eval(expression);
+        let roundedResult = Math.round(result * 100) / 100;
+        display.value = parseFloat(roundedResult);
+    } catch (error) {
+        display.value = 'Error';
+    }
+}
+
+// Fungsi untuk menangani input keyboard
+function handleKeyPress(event) {
+    const key = event.key;
+
+    // Jika tombol yang ditekan adalah angka
+    if (/[0-9]/.test(key)) {
+        appendNumber(key);
+    }
+    // Jika tombol yang ditekan adalah operator
+    else if (['+', '-', '*', '/', '%', '^', '.'].includes(key)) {
+        appendOperator(key);
+    }
+    // Jika tombol Enter ditekan, lakukan perhitungan
+    else if (key === 'Enter') {
+        calculate();
+    }
+    // Jika tombol Escape ditekan, bersihkan display
+    else if (key === 'Escape') {
+        clearDisplay();
+    }
+}
+
+// Menambahkan event listener untuk menangani input keyboard
+document.addEventListener('keydown', handleKeyPress);
+*/
