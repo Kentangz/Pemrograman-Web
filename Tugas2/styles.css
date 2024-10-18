@@ -5,10 +5,16 @@
     box-sizing: border-box;
   }
   h1 {
+    background-color: black;
     text-align: center;
-    color: #002765;
+    color: #003995;
     padding: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    text-shadow: 
+    -1px -1px 0 #ffffff,  
+    1px -1px 0 #ffffff,  
+    -1px 1px 0 #ffffff,  
+    1px 1px 0 #ffffff;
   }
   
   .container {
@@ -19,17 +25,7 @@
   }
   
   
-  .container h1 {
-    text-align: center;
-    color: #e61c52f6; /* Warna teks asli */
-    padding-bottom: 0;
-    margin-bottom: 0;
-    text-shadow: 
-      -1px -1px 0 #ffffff,  
-      1px -1px 0 #ffffff,  
-      -1px 1px 0 #ffffff,  
-      1px 1px 0 #ffffff; /* Menambahkan garis tepi putih */
-  }
+  
   
   
   
