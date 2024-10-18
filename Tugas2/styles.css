@@ -4,35 +4,35 @@
     font-family: Arial, sans-serif;
     box-sizing: border-box;
   }
+  h1 {
+    text-align: center;
+    color: #002765;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
   
   .container {
     width: 100%;
     min-height: 100vh;
-    /* background: linear-gradient(135deg, #153677, #4e085f); */
-    background-image: radial-gradient(
-      circle at 50% -20.71%,
-      #ff7f85 0,
-      #ff748c 8.33%,
-      #ff6994 16.67%,
-      #ff5d9c 25%,
-      #ff52a4 33.33%,
-      #ff47ad 41.67%,
-      #f23cb5 50%,
-      #e234be 58.33%,
-      #cf32c8 66.67%,
-      #b935d2 75%,
-      #9f3bdb 83.33%,
-      #7e42e5 91.67%,
-      #514aed 100%
-    );
+    background: #90078e; /* Ungu */
     padding: 15px;
   }
   
+  
   .container h1 {
     text-align: center;
-    color: #002765;
+    color: #e61c52f6; /* Warna teks asli */
     padding-bottom: 0;
+    margin-bottom: 0;
+    text-shadow: 
+      -1px -1px 0 #ffffff,  
+      1px -1px 0 #ffffff,  
+      -1px 1px 0 #ffffff,  
+      1px 1px 0 #ffffff; /* Menambahkan garis tepi putih */
   }
+  
+  
+  
   
   .todo-app {
     /* width: 100%; */
