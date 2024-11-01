@@ -1,8 +1,6 @@
 <?php
-// Namespace declaration for the base Book class
 namespace MyLibrary\Base;
 
-// Abstract class with abstract method
 abstract class Book {
     protected $title;
     protected $author;
