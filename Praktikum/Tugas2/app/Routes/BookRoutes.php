@@ -5,9 +5,7 @@ namespace app\Routes;
 include "app/Controller/BookController.php";
 
 use app\Controller\BookController;
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-header("Access-Control-Allow-Headers: Content-Type");
+
 
 class BookRoutes {
     public function handle($method, $path) {

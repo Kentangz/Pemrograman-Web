@@ -8,10 +8,6 @@ include "app/Models/Book.php";  // Ganti 'Product.php' dengan 'Book.php'
 use app\Models\Book;  // Ganti 'Product' dengan 'Book'
 use app\Traits\ApiResponseFormatter;
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-header("Access-Control-Allow-Headers: Content-Type");
-
 class BookController {
     use ApiResponseFormatter;
 
