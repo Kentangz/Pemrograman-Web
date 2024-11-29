@@ -9,9 +9,9 @@ function searchBooks() {
 
     bookCards.forEach(book => {
         const bookTitle = book.querySelector('h3').textContent.toLowerCase();
-        const bookDescription = book.querySelector('.description').textContent.toLowerCase();
 
-        if (bookTitle.includes(searchText) || bookDescription.includes(searchText)) {
+
+        if (bookTitle.includes(searchText)) {
             book.style.display = 'flex'; // Show book card
         } else {
             book.style.display = 'none'; // Hide book card
