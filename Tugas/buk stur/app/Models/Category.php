@@ -10,24 +10,20 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'category_name',
         'description', // Menambahkan kolom description
     ];
-
     // Accessor untuk category_name
     public function getCategoryNameAttribute($value)
     {
         return ucfirst($value); // Mengubah kategori menjadi huruf kapital pertama
     }
-
     // Accessor untuk description
     public function getDescriptionAttribute($value)
     {
         return ucfirst($value); // Mengubah deskripsi menjadi huruf kapital pertama
     }
-
     // Relasi ke Books
     public function books()
     {

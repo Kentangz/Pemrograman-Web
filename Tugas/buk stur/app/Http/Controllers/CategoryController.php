@@ -19,7 +19,6 @@ class CategoryController extends Controller
             'data' => $categories
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -40,7 +39,6 @@ class CategoryController extends Controller
             'data' => $category,
         ], 201);
     }
-
     /**
      * Display the specified resource.
      */
@@ -54,13 +52,11 @@ class CategoryController extends Controller
                 'message' => 'Category not found',
             ], 404);
         }
-
         return response()->json([
             'success' => true,
             'data' => $category,
         ]);
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -90,7 +86,6 @@ class CategoryController extends Controller
             'data' => $category,
         ]);
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -104,7 +99,6 @@ class CategoryController extends Controller
                 'message' => 'Category not found',
             ], 404);
         }
-
         // Hapus kategori
         $category->delete();
 

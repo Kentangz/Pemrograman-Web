@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
-
 class BookController extends Controller
 {
     /**
@@ -22,7 +21,6 @@ class BookController extends Controller
             'data' => $books
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -52,7 +50,6 @@ class BookController extends Controller
         } else {
             $imagePath = null;
         }
-
         // Menyimpan data buku ke database
         $book = Book::create([
             'image' => $imagePath,
@@ -69,7 +66,6 @@ class BookController extends Controller
             'data' => $book,
         ], 201);
     }
-
     /**
      * Display the specified resource.
      */
@@ -89,7 +85,6 @@ class BookController extends Controller
             'data' => $book,
         ]);
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -106,7 +101,6 @@ class BookController extends Controller
                 'message' => 'Book not found',
             ], 404);
         }
-    
         // Validasi input
         $validatedData = Validator::make($request->all(), [
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -116,7 +110,6 @@ class BookController extends Controller
             'description' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
         ]);
-    
         // Periksa apakah validasi gagal
         if ($validatedData->fails()) {
             // Log error validasi
@@ -126,7 +119,6 @@ class BookController extends Controller
                 'message' => $validatedData->errors(),
             ], 400);
         }
-    
         // Cek dan simpan gambar baru jika ada
         if ($request->hasFile('image')) {
             if ($book->image && Storage::exists('public/' . $book->image)) {
@@ -136,7 +128,6 @@ class BookController extends Controller
         } else {
             $imagePath = $book->image; // Gunakan gambar lama
         }
-    
         // Update data buku
         $book->update([
             'image' => $imagePath,
@@ -146,16 +137,12 @@ class BookController extends Controller
             'description' => $request->get('description'),
             'category_id' => $request->get('category_id'),
         ]);
-    
         return response()->json([
             'success' => true,
             'message' => 'Book updated successfully!',
             'data' => $book,
         ]);
     }
-    
-    
-
     /**
      * Remove the specified resource from storage.
      */
@@ -169,12 +156,10 @@ class BookController extends Controller
                 'message' => 'Book not found',
             ], 404);
         }
-
         // Hapus gambar jika ada
         if ($book->image && Storage::exists('public/' . $book->image)) {
             Storage::delete('public/' . $book->image);
         }
-
         // Hapus buku
         $book->delete();
 
