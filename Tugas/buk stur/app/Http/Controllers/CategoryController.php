@@ -3,108 +3,103 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Menampilkan semua kategori
     public function index()
     {
-        // Retrieve all categories with their descriptions
         $categories = Category::all();
-        return response()->json([
-            'success' => true,
-            'data' => $categories
-        ]);
+        return CategoryResource::collection($categories); // Menggunakan CategoryResource
     }
-    /**
-     * Store a newly created resource in storage.
-     */
+
+    // Menambahkan kategori baru
     public function store(Request $request)
     {
-        // Validasi input, menambahkan kolom 'description'
-        $validatedData = $request->validate([
-            'category_name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:500', // Menambahkan validasi untuk kolom description
+        // Definisikan aturan validasi
+        $validator = Validator::make($request->all(), [
+            'category_name' => 'required|max:255',
+            'description' => 'nullable|max:500',
         ]);
 
-        // Menyimpan kategori baru
-        $category = Category::create($validatedData);
+        // Cek apakah validasi gagal
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation Error!',
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Category created successfully!',
-            'data' => $category,
-        ], 201);
+        // Jika validasi sukses, lanjutkan untuk menyimpan data kategori
+        $category = Category::create($request->all());
+
+        return new CategoryResource($category); // Menggunakan CategoryResource
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    // Menampilkan detail kategori
+    public function show($id)
     {
         $category = Category::find($id);
 
         if (!$category) {
             return response()->json([
                 'success' => false,
-                'message' => 'Category not found',
-            ], 404);
+                'message' => 'Category not found'
+            ], 404); // Peringatan jika kategori tidak ditemukan
         }
-        return response()->json([
-            'success' => true,
-            'data' => $category,
-        ]);
+
+        return new CategoryResource($category);
     }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+
+    // Mengupdate kategori
+    public function update(Request $request, $id)
     {
         $category = Category::find($id);
 
         if (!$category) {
             return response()->json([
                 'success' => false,
-                'message' => 'Category not found',
+                'message' => 'Category not found'
             ], 404);
         }
-
-        // Validasi input, termasuk kolom 'description'
-        $validatedData = $request->validate([
-            'category_name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:500', // Validasi untuk kolom description
+        $validatedData = Validator::make($request->all(), [
+            'category_name' => 'required|max:255',
+            'description' => 'nullable|max:500',
         ]);
 
-        // Perbarui kategori
-        $category->update($validatedData);
+        if ($validatedData->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validatedData->errors(),
+            ], 400);
+        }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Category updated successfully!',
-            'data' => $category,
-        ]);
+        $category->update($request->all());
+
+        return new CategoryResource($category);
     }
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+    // Menghapus kategori
+    public function destroy($id)
     {
         $category = Category::find($id);
 
         if (!$category) {
             return response()->json([
                 'success' => false,
-                'message' => 'Category not found',
-            ], 404);
+                'message' => 'Category not found'
+            ], 404); // Peringatan jika kategori tidak ditemukan
         }
-        // Hapus kategori
+
         $category->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Category deleted successfully!',
+            'message' => 'Category deleted successfully!'
         ]);
     }
 }

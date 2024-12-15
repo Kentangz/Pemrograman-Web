@@ -3,27 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Http\Resources\BookResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Menampilkan semua buku
     public function index()
     {
         $books = Book::all();
-        return response()->json([
-            'success' => true,
-            'data' => $books
-        ]);
+        return BookResource::collection($books);
     }
-    /**
-     * Store a newly created resource in storage.
-     */
+
+    // Menambahkan buku baru
     public function store(Request $request)
     {
         // Validasi input
@@ -36,6 +29,7 @@ class BookController extends Controller
             'category_id' => 'nullable|exists:categories,id',
         ]);
 
+        // Jika validasi gagal, tampilkan pesan error
         if ($validatedData->fails()) {
             return response()->json([
                 'success' => false,
@@ -44,12 +38,11 @@ class BookController extends Controller
         }
 
         // Menyimpan gambar jika ada
+        $imagePath = null;
         if ($request->hasFile('image')) {
-            // Mengambil file yang diunggah dan menyimpannya
             $imagePath = $request->file('image')->store('books/images', 'public');
-        } else {
-            $imagePath = null;
         }
+
         // Menyimpan data buku ke database
         $book = Book::create([
             'image' => $imagePath,
@@ -60,47 +53,35 @@ class BookController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Book created successfully!',
-            'data' => $book,
-        ], 201);
+        return new BookResource($book); // Menggunakan BookResource
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    // Menampilkan detail buku
+    public function show($id)
     {
         $book = Book::find($id);
 
         if (!$book) {
             return response()->json([
                 'success' => false,
-                'message' => 'Book not found',
-            ], 404);
+                'message' => 'Book not found'
+            ], 404); // Peringatan jika buku tidak ditemukan
         }
 
-        return response()->json([
-            'success' => true,
-            'data' => $book,
-        ]);
+        return new BookResource($book);
     }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {   
-        // Log semua data yang diterima dari request untuk debugging
-        Log::info('Request data:', $request->all());
-    
+
+    // Mengupdate data buku
+    public function update(Request $request, $id)
+    {
         $book = Book::find($id);
-    
         if (!$book) {
             return response()->json([
                 'success' => false,
-                'message' => 'Book not found',
+                'message' => 'Book not found'
             ], 404);
         }
+
         // Validasi input
         $validatedData = Validator::make($request->all(), [
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -110,62 +91,53 @@ class BookController extends Controller
             'description' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
         ]);
-        // Periksa apakah validasi gagal
+
+        // Jika validasi gagal, tampilkan pesan error
         if ($validatedData->fails()) {
-            // Log error validasi
-            Log::error('Validation failed:', $validatedData->errors()->toArray());
             return response()->json([
                 'success' => false,
                 'message' => $validatedData->errors(),
             ], 400);
         }
-        // Cek dan simpan gambar baru jika ada
+
+        // Menyimpan gambar baru jika ada
+        $imagePath = $book->image;
         if ($request->hasFile('image')) {
-            if ($book->image && Storage::exists('public/' . $book->image)) {
-                Storage::delete('public/' . $book->image);
-            }
             $imagePath = $request->file('image')->store('books/images', 'public');
-        } else {
-            $imagePath = $book->image; // Gunakan gambar lama
         }
-        // Update data buku
+
+        // Mengupdate data buku
         $book->update([
             'image' => $imagePath,
-            'book_name' => $request->get('book_name'),
-            'creator' => $request->get('creator'),
-            'price' => $request->get('price'),
-            'description' => $request->get('description'),
-            'category_id' => $request->get('category_id'),
+            'book_name' => $request->book_name,
+            'creator' => $request->creator,
+            'price' => $request->price,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
         ]);
-        return response()->json([
-            'success' => true,
-            'message' => 'Book updated successfully!',
-            'data' => $book,
-        ]);
+
+        return new BookResource($book); // Menggunakan BookResource
     }
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+    // Menghapus buku
+    // Menghapus buku berdasarkan ID
+    public function destroy($id)
     {
         $book = Book::find($id);
 
         if (!$book) {
             return response()->json([
                 'success' => false,
-                'message' => 'Book not found',
-            ], 404);
+                'message' => 'Book not found'
+            ], 404); // Peringatan jika buku tidak ditemukan
         }
-        // Hapus gambar jika ada
-        if ($book->image && Storage::exists('public/' . $book->image)) {
-            Storage::delete('public/' . $book->image);
-        }
-        // Hapus buku
+
         $book->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Book deleted successfully!',
+            'message' => 'Book deleted successfully!'
         ]);
     }
 }
+
