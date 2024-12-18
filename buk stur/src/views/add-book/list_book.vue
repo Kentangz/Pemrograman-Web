@@ -7,7 +7,7 @@
 
     <!-- Action Buttons -->
     <div class="d-flex justify-content-end mb-4">
-      <router-link to="/create-book" class="btn btn-primary btn-lg me-3">Create New Book</router-link>
+      <router-link to="/add-book/create-book" class="btn btn-primary btn-lg me-3">Create New Book</router-link>
       <router-link to="/category-list" class="btn btn-secondary btn-lg">Category List</router-link>
     </div>
 
@@ -39,7 +39,7 @@
             <td>{{ book.category.category_name }}</td>
             <td>
               <div class="d-flex flex-column gap-2">
-                <router-link :to="`/edit-book/${book.id}`" class="btn btn-warning">Edit</router-link>
+                <router-link :to="`/add-book/edit-book/${book.id}`" class="btn btn-warning">Edit</router-link>
                 <button @click="deleteBook(book.id)" class="btn btn-danger">Delete</button>
               </div>
             </td>

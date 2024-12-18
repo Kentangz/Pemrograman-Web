@@ -7,7 +7,7 @@
 
     <!-- Create Category Button -->
     <div class="d-flex justify-content-end mb-4">
-      <router-link to="/create-category" class="btn btn-outline-primary btn-lg shadow-sm">Create New Category</router-link>
+      <router-link to="/category-list/create-book-category" class="btn btn-outline-primary btn-lg shadow-sm">Create New Category</router-link>
     </div>
 
     <!-- Categories Table -->
@@ -28,7 +28,7 @@
             <td class="text-center">{{ category.description }}</td>
             <td class="d-flex flex-column align-items-center">
               <!-- Edit Category Button -->
-              <router-link :to="`/edit-category/${category.id}`" class="btn btn-outline-warning btn-sm mb-2 shadow-sm">
+              <router-link :to="`/category-list/edit-category/${category.id}`" class="btn btn-outline-warning btn-sm mb-2 shadow-sm">
                 <i class="bi bi-pencil-fill"></i> Edit
               </router-link>
 
