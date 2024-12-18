@@ -30,7 +30,7 @@
           <tr v-for="book in paginatedBooks" :key="book.id" class="text-center align-middle">
             <td>{{ book.id }}</td>
             <td>
-              <img :src="`http://localhost:8000/storage/${book.image}`" alt="Book Image" class="img-fluid" style="width: 80px; height: 120px; object-fit: cover;" />
+              <img :src="`http://localhost:8000/storage/${book.image}`" alt="Book Image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;" />
             </td>
             <td>{{ book.book_name }}</td>
             <td>{{ book.creator }}</td>
