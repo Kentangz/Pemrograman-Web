@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Http\Resources\BookResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class BookController extends Controller
 {
@@ -121,23 +123,32 @@ class BookController extends Controller
 
     // Menghapus buku
     // Menghapus buku berdasarkan ID
-    public function destroy($id)
-    {
-        $book = Book::find($id);
+// Menghapus buku
+public function destroy($id)
+{
+    $book = Book::find($id);
 
-        if (!$book) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Book not found'
-            ], 404); // Peringatan jika buku tidak ditemukan
-        }
-
-        $book->delete();
-
+    if (!$book) {
         return response()->json([
-            'success' => true,
-            'message' => 'Book deleted successfully!'
-        ]);
+            'success' => false,
+            'message' => 'Book not found'
+        ], 404); // Peringatan jika buku tidak ditemukan
     }
+
+    // Hapus gambar jika ada
+    if ($book->image) {
+        // Menghapus file gambar dari storage
+        Storage::disk('public')->delete($book->image);
+    }
+
+    // Hapus data buku
+    $book->delete();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Book deleted successfully!'
+    ]);
+}
+
 }
 
