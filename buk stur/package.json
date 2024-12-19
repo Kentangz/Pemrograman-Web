@@ -12,6 +12,7 @@
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "buk-stur": "file:",
+    "font-awesome": "^4.7.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
