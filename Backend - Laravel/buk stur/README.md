@@ -9,19 +9,27 @@
 
 ### Setup Instructions
 
-1. Install dependencies:
+1. Install dependencies using Composer:
     ```bash
-    npm install
+    composer install
     ```
 
-2. Install Bootstrap:
+2. Set up your environment variables:
     ```bash
-    npm install bootstrap
+    env{
+        DB_CONNECTION=mysql
+        DB_DATABASE=buk_stur
+    }
     ```
 
-3. Run the development build:
+3. Link the storage:
     ```bash
-    npm run dev
+    php artisan storage:link
+    ```
+
+4. Start the development server:
+    ```bash
+    php artisan serve
     ```
 
 ## About Laravel
