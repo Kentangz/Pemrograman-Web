@@ -28,7 +28,7 @@
           <div class="book-info">
             <h3>{{ book.book_name }}</h3>
             <p class="author">{{ book.creator }}</p>
-            <p class="price">$ {{ book.price }}</p>
+            <p class="price">${{ book.price }}</p>
             <p class="description">{{ book.description }}</p>
           </div>
         </div>
