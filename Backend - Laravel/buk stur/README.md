@@ -7,16 +7,25 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+### Setup Instructions
+
+1. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+2. Install Bootstrap:
+    ```bash
+    npm install bootstrap
+    ```
+
+3. Run the development build:
+    ```bash
+    npm run dev
+    ```
+
 ## About Laravel
 
-NB : 
-Composer Install
-env{
-    DB_CONNECTION=mysql
-    DB_DATABASE=buk_stur
-    }
-php artisan storage:link 
-php artisan server
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 

@@ -1,7 +1,23 @@
+### Setup Instructions
+
+1. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+2. Install Bootstrap:
+    ```bash
+    npm install bootstrap
+    ```
+
+3. Run the development build:
+    ```bash
+    npm run dev
+    ```
+
+
 # Vue 3 + Vite
-NB :
-npm install
-npm install bootstrap
+
 
 This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
